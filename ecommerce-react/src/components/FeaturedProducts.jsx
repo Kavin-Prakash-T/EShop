@@ -7,8 +7,15 @@ const FeaturedProducts = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/products`);
-      setProducts(res.data||[]);
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/products`
+        );
+        setProducts(res.data.products || []);
+      } catch (error) {
+        console.error(error);
+        setProducts([]);
+      }
     };
     fetchData();
   }, []);
@@ -16,7 +23,7 @@ const FeaturedProducts = () => {
   return (
     <section className="bg-slate-700 py-16">
       <div className="max-w-7xl mx-auto px-6">
-        
+
         <div className="text-center mb-12">
           <h1 className="text-3xl font-bold text-white">
             Top Featured Products
