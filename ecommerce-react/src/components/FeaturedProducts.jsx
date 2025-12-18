@@ -11,10 +11,9 @@ const FeaturedProducts = () => {
         const res = await axios.get(
           `${import.meta.env.VITE_API_BASE_URL}/products`
         );
-        setProducts(res.data.products || []);
+        setProducts(res.data.products);
       } catch (error) {
         console.error(error);
-        setProducts([]);
       }
     };
     fetchData();
