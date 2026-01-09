@@ -19,10 +19,6 @@ const registerUser = async (req, res) => {
         res.status(201).json({ message: "User created succesfully",user })
     } catch (err) {
         console.error("Registration error:", err);
-        // Handle MongoDB duplicate key error
-        if (err.code === 11000) {
-            return res.status(400).json({ error: "User already exist" });
-        }
         res.status(400).json({ error: err.message });
     }
 }
